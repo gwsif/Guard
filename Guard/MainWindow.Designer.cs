@@ -51,14 +51,14 @@
             this.timeLeftTitleLabel = new System.Windows.Forms.Label();
             this.timeLeftLabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.timeSinceTitleLabel = new System.Windows.Forms.Label();
+            this.timeSinceLabel = new System.Windows.Forms.Label();
             this.currentTimeTitleLabel = new System.Windows.Forms.Label();
             this.currentTimeLabel = new System.Windows.Forms.Label();
             this.timersLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.topPanel = new System.Windows.Forms.Panel();
             this.closeButton = new System.Windows.Forms.Button();
-            this.timeSinceTitleLabel = new System.Windows.Forms.Label();
-            this.timeSinceLabel = new System.Windows.Forms.Label();
+            this.settingsButton = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.nextGoalPanel.SuspendLayout();
@@ -71,9 +71,9 @@
             // 
             this.rightBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.rightBorder.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rightBorder.Location = new System.Drawing.Point(932, 33);
+            this.rightBorder.Location = new System.Drawing.Point(932, 0);
             this.rightBorder.Name = "rightBorder";
-            this.rightBorder.Size = new System.Drawing.Size(1, 417);
+            this.rightBorder.Size = new System.Drawing.Size(1, 450);
             this.rightBorder.TabIndex = 1;
             // 
             // bottomPanel
@@ -89,9 +89,9 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 33);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1, 416);
+            this.panel1.Size = new System.Drawing.Size(1, 449);
             this.panel1.TabIndex = 3;
             // 
             // timer1
@@ -105,11 +105,13 @@
             this.datesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.datesTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.datesTextBox.ForeColor = System.Drawing.SystemColors.Menu;
-            this.datesTextBox.Location = new System.Drawing.Point(3, 6);
+            this.datesTextBox.Location = new System.Drawing.Point(6, 7);
             this.datesTextBox.Multiline = true;
             this.datesTextBox.Name = "datesTextBox";
-            this.datesTextBox.Size = new System.Drawing.Size(146, 227);
+            this.datesTextBox.ReadOnly = true;
+            this.datesTextBox.Size = new System.Drawing.Size(161, 226);
             this.datesTextBox.TabIndex = 4;
+            this.datesTextBox.TabStop = false;
             // 
             // achTextBox
             // 
@@ -121,34 +123,38 @@
             this.achTextBox.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.achTextBox.Multiline = true;
             this.achTextBox.Name = "achTextBox";
-            this.achTextBox.Size = new System.Drawing.Size(347, 226);
+            this.achTextBox.ReadOnly = true;
+            this.achTextBox.Size = new System.Drawing.Size(327, 226);
             this.achTextBox.TabIndex = 5;
+            this.achTextBox.TabStop = false;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.panel2.Controls.Add(this.seeDatesButton);
             this.panel2.Controls.Add(this.datesTextBox);
-            this.panel2.Location = new System.Drawing.Point(762, 72);
+            this.panel2.Location = new System.Drawing.Point(743, 72);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(152, 265);
+            this.panel2.Size = new System.Drawing.Size(171, 265);
             this.panel2.TabIndex = 6;
             // 
             // seeDatesButton
             // 
             this.seeDatesButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
             this.seeDatesButton.FlatAppearance.BorderSize = 0;
-            this.seeDatesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.seeDatesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.seeDatesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.seeDatesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
             this.seeDatesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.seeDatesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.seeDatesButton.ForeColor = System.Drawing.Color.White;
             this.seeDatesButton.Location = new System.Drawing.Point(0, 234);
             this.seeDatesButton.Name = "seeDatesButton";
-            this.seeDatesButton.Size = new System.Drawing.Size(152, 31);
+            this.seeDatesButton.Size = new System.Drawing.Size(171, 31);
             this.seeDatesButton.TabIndex = 7;
-            this.seeDatesButton.Text = "See All Dates";
+            this.seeDatesButton.TabStop = false;
+            this.seeDatesButton.Text = "Show All Dates";
             this.seeDatesButton.UseVisualStyleBackColor = false;
+            this.seeDatesButton.Click += new System.EventHandler(this.seeDatesButton_Click);
             // 
             // panel3
             // 
@@ -157,15 +163,15 @@
             this.panel3.Controls.Add(this.achTextBox);
             this.panel3.Location = new System.Drawing.Point(389, 72);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(356, 265);
+            this.panel3.Size = new System.Drawing.Size(338, 265);
             this.panel3.TabIndex = 7;
             // 
             // seeAchButton
             // 
             this.seeAchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
             this.seeAchButton.FlatAppearance.BorderSize = 0;
-            this.seeAchButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.seeAchButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.seeAchButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.seeAchButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
             this.seeAchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.seeAchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.seeAchButton.ForeColor = System.Drawing.Color.White;
@@ -173,7 +179,8 @@
             this.seeAchButton.Name = "seeAchButton";
             this.seeAchButton.Size = new System.Drawing.Size(356, 31);
             this.seeAchButton.TabIndex = 7;
-            this.seeAchButton.Text = "See All Achievements";
+            this.seeAchButton.TabStop = false;
+            this.seeAchButton.Text = "Show All Achievements";
             this.seeAchButton.UseVisualStyleBackColor = false;
             // 
             // addNowButton
@@ -184,10 +191,11 @@
             this.addNowButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.ForestGreen;
             this.addNowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addNowButton.ForeColor = System.Drawing.Color.White;
-            this.addNowButton.Location = new System.Drawing.Point(762, 338);
+            this.addNowButton.Location = new System.Drawing.Point(743, 338);
             this.addNowButton.Name = "addNowButton";
-            this.addNowButton.Size = new System.Drawing.Size(152, 25);
+            this.addNowButton.Size = new System.Drawing.Size(171, 25);
             this.addNowButton.TabIndex = 8;
+            this.addNowButton.TabStop = false;
             this.addNowButton.Text = "Add Now";
             this.addNowButton.UseVisualStyleBackColor = false;
             this.addNowButton.Click += new System.EventHandler(this.addNowButton_Click);
@@ -200,10 +208,11 @@
             this.addPrevButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSlateBlue;
             this.addPrevButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addPrevButton.ForeColor = System.Drawing.Color.White;
-            this.addPrevButton.Location = new System.Drawing.Point(762, 363);
+            this.addPrevButton.Location = new System.Drawing.Point(743, 363);
             this.addPrevButton.Name = "addPrevButton";
-            this.addPrevButton.Size = new System.Drawing.Size(152, 25);
+            this.addPrevButton.Size = new System.Drawing.Size(171, 25);
             this.addPrevButton.TabIndex = 9;
+            this.addPrevButton.TabStop = false;
             this.addPrevButton.Text = "Add Previous";
             this.addPrevButton.UseVisualStyleBackColor = false;
             this.addPrevButton.Click += new System.EventHandler(this.addPrevButton_Click);
@@ -213,7 +222,7 @@
             this.achLabel.AutoSize = true;
             this.achLabel.Font = new System.Drawing.Font("Segoe UI Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.achLabel.ForeColor = System.Drawing.Color.White;
-            this.achLabel.Location = new System.Drawing.Point(521, 44);
+            this.achLabel.Location = new System.Drawing.Point(516, 44);
             this.achLabel.Name = "achLabel";
             this.achLabel.Size = new System.Drawing.Size(97, 25);
             this.achLabel.TabIndex = 10;
@@ -225,7 +234,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(810, 44);
+            this.label1.Location = new System.Drawing.Point(800, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 25);
             this.label1.TabIndex = 11;
@@ -307,92 +316,6 @@
             this.panel5.Size = new System.Drawing.Size(353, 80);
             this.panel5.TabIndex = 14;
             // 
-            // currentTimeTitleLabel
-            // 
-            this.currentTimeTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentTimeTitleLabel.ForeColor = System.Drawing.Color.White;
-            this.currentTimeTitleLabel.Location = new System.Drawing.Point(650, 421);
-            this.currentTimeTitleLabel.Name = "currentTimeTitleLabel";
-            this.currentTimeTitleLabel.Size = new System.Drawing.Size(113, 22);
-            this.currentTimeTitleLabel.TabIndex = 0;
-            this.currentTimeTitleLabel.Text = "System Time:";
-            this.currentTimeTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.currentTimeTitleLabel.Click += new System.EventHandler(this.currentTimeTitleLabel_Click);
-            // 
-            // currentTimeLabel
-            // 
-            this.currentTimeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.currentTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.currentTimeLabel.Location = new System.Drawing.Point(766, 420);
-            this.currentTimeLabel.Name = "currentTimeLabel";
-            this.currentTimeLabel.Size = new System.Drawing.Size(160, 23);
-            this.currentTimeLabel.TabIndex = 1;
-            this.currentTimeLabel.Text = "01/01/1970 00:00:00 AM";
-            this.currentTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.currentTimeLabel.Click += new System.EventHandler(this.currentTimeLabel_Click);
-            // 
-            // timersLabel
-            // 
-            this.timersLabel.AutoSize = true;
-            this.timersLabel.Font = new System.Drawing.Font("Segoe UI Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timersLabel.ForeColor = System.Drawing.Color.White;
-            this.timersLabel.Location = new System.Drawing.Point(164, 44);
-            this.timersLabel.Name = "timersLabel";
-            this.timersLabel.Size = new System.Drawing.Size(59, 25);
-            this.timersLabel.TabIndex = 15;
-            this.timersLabel.Text = "Status";
-            this.timersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::Guard.Properties.Resources.gear_lightgrey;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(9)))), ((int)(((byte)(9)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(12, 410);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(28, 28);
-            this.button1.TabIndex = 16;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // topPanel
-            // 
-            this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
-            this.topPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("topPanel.BackgroundImage")));
-            this.topPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.topPanel.Controls.Add(this.closeButton);
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(933, 33);
-            this.topPanel.TabIndex = 0;
-            this.topPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.topPanel_Paint);
-            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
-            this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
-            this.topPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseUp);
-            // 
-            // closeButton
-            // 
-            this.closeButton.BackColor = System.Drawing.Color.Transparent;
-            this.closeButton.FlatAppearance.BorderSize = 0;
-            this.closeButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
-            this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeButton.ForeColor = System.Drawing.Color.White;
-            this.closeButton.Location = new System.Drawing.Point(895, 0);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(38, 33);
-            this.closeButton.TabIndex = 0;
-            this.closeButton.Text = "X";
-            this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
             // timeSinceTitleLabel
             // 
             this.timeSinceTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -415,13 +338,99 @@
             this.timeSinceLabel.Text = "0 Years 0 Months 0 Days 0 Hours 0 Minutes";
             this.timeSinceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // currentTimeTitleLabel
+            // 
+            this.currentTimeTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentTimeTitleLabel.ForeColor = System.Drawing.Color.White;
+            this.currentTimeTitleLabel.Location = new System.Drawing.Point(771, 398);
+            this.currentTimeTitleLabel.Name = "currentTimeTitleLabel";
+            this.currentTimeTitleLabel.Size = new System.Drawing.Size(113, 22);
+            this.currentTimeTitleLabel.TabIndex = 0;
+            this.currentTimeTitleLabel.Text = "System Time";
+            this.currentTimeTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentTimeTitleLabel.Click += new System.EventHandler(this.currentTimeTitleLabel_Click);
+            // 
+            // currentTimeLabel
+            // 
+            this.currentTimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.currentTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.currentTimeLabel.Location = new System.Drawing.Point(743, 418);
+            this.currentTimeLabel.Name = "currentTimeLabel";
+            this.currentTimeLabel.Size = new System.Drawing.Size(171, 23);
+            this.currentTimeLabel.TabIndex = 1;
+            this.currentTimeLabel.Text = "01/01/1970 00:00:00 AM";
+            this.currentTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentTimeLabel.Click += new System.EventHandler(this.currentTimeLabel_Click);
+            // 
+            // timersLabel
+            // 
+            this.timersLabel.AutoSize = true;
+            this.timersLabel.Font = new System.Drawing.Font("Segoe UI Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timersLabel.ForeColor = System.Drawing.Color.White;
+            this.timersLabel.Location = new System.Drawing.Point(165, 44);
+            this.timersLabel.Name = "timersLabel";
+            this.timersLabel.Size = new System.Drawing.Size(59, 25);
+            this.timersLabel.TabIndex = 15;
+            this.timersLabel.Text = "Status";
+            this.timersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // topPanel
+            // 
+            this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
+            this.topPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("topPanel.BackgroundImage")));
+            this.topPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.topPanel.Controls.Add(this.closeButton);
+            this.topPanel.Location = new System.Drawing.Point(1, 1);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(933, 33);
+            this.topPanel.TabIndex = 0;
+            this.topPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.topPanel_Paint);
+            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
+            this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
+            this.topPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseUp);
+            // 
+            // closeButton
+            // 
+            this.closeButton.BackColor = System.Drawing.Color.Transparent;
+            this.closeButton.FlatAppearance.BorderSize = 0;
+            this.closeButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeButton.ForeColor = System.Drawing.Color.White;
+            this.closeButton.Location = new System.Drawing.Point(895, 0);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(38, 33);
+            this.closeButton.TabIndex = 0;
+            this.closeButton.TabStop = false;
+            this.closeButton.Text = "X";
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // settingsButton
+            // 
+            this.settingsButton.BackColor = System.Drawing.Color.Gray;
+            this.settingsButton.FlatAppearance.BorderSize = 0;
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.settingsButton.Location = new System.Drawing.Point(19, 413);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(110, 25);
+            this.settingsButton.TabIndex = 17;
+            this.settingsButton.TabStop = false;
+            this.settingsButton.Text = "Settings";
+            this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.settingsButton.UseVisualStyleBackColor = false;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ClientSize = new System.Drawing.Size(933, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.currentTimeLabel);
             this.Controls.Add(this.timersLabel);
             this.Controls.Add(this.panel5);
@@ -442,7 +451,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
-            this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -485,9 +493,9 @@
         private System.Windows.Forms.Label currentTimeTitleLabel;
         private System.Windows.Forms.Label currentTimeLabel;
         private System.Windows.Forms.Label timersLabel;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label timeSinceTitleLabel;
         private System.Windows.Forms.Label timeSinceLabel;
+        private System.Windows.Forms.Button settingsButton;
     }
 }
 

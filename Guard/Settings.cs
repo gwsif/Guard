@@ -130,7 +130,7 @@ namespace Guard
             //    The Gregorian Input function expects you to tell it whether we are converting years, months
             //    days, hours, or minutes as the second argument.
             string ec_years = guard.GregorianInputToEpoch(c_years, "years");
-            string ec_months = guard.GregorianInputToEpoch(c_months, "monhts");
+            string ec_months = guard.GregorianInputToEpoch(c_months, "months");
             string ec_days = guard.GregorianInputToEpoch(c_days, "days");
             string ec_hours = guard.GregorianInputToEpoch(c_hours, "hours");
             string ec_minutes = guard.GregorianInputToEpoch(c_minutes, "minutes");
@@ -159,7 +159,7 @@ namespace Guard
         private void btnUsePlus_Click(object sender, EventArgs e)
         {
             // First lets get some holder values
-            string p_years = txtBoxC_Years.Text;
+            string p_years = txtBoxP_Years.Text;
             string p_months = txtBoxP_Months.Text;
             string p_days = txtBoxP_Days.Text;
             string p_hours = txtBoxP_Hours.Text;
@@ -299,7 +299,6 @@ namespace Guard
         {
             // Ignore Me
         }
-
     }
 
 

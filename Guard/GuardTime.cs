@@ -300,7 +300,7 @@ namespace Guard
 
             // Declare variables that define our times.
             // MAY NOT BE NECESSARY!
-            uint secondsInYear = 31557600;
+            uint secondsInYear = 31536000; //old value was 31557600
             uint secondsInMonth = 2592000;
             uint secondsInDay = 86400;
             uint secondsInHour = 3600;
@@ -394,7 +394,7 @@ namespace Guard
                 // If it's a year, parse the string and multiply the value by the number of seconds in a year.
                 case "years":
                     Int64.TryParse(aString, out n);
-                    n = n * 31557600;
+                    n = n * 31536000; //old value was 31557600
                     break;
 
                 case "months":

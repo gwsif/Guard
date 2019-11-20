@@ -153,10 +153,10 @@ namespace Guard
         //
         // When a user clicks the settings icon, a new form is launched
         //    which contains the primary settings for the app.
-        private void button1_Click(object sender, EventArgs e)
+        private void settingsButton_Click(object sender, EventArgs e)
         {
-            Settings f3 = new Settings();
-            f3.ShowDialog();
+            Settings settingsForm = new Settings();
+            settingsForm.ShowDialog();
 
             // When the window closes , refresh stuff
             RefreshData();
@@ -236,6 +236,16 @@ namespace Guard
 
         }
 
+        // SEE ALL DATES BUTTON
+        // 
+        // When the 'See All Dates Button is Clicked, Launch the SeeAll Form.
+        private void seeDatesButton_Click(object sender, EventArgs e)
+        {
+            SeeAll seeAllForm = new SeeAll();
+            seeAllForm.ShowDialog();
+        }
+
+
         private void RefreshData()
         {
             // Clear the textboxes
@@ -246,7 +256,7 @@ namespace Guard
             GuardTime guard = new GuardTime();
 
             // Issue a new SELECT query for the Achievements table.
-            SQLize refreshAch = new SQLize("SELECT * FROM (SELECT * FROM Achievements ORDER BY ach_id DESC LIMIT 14) ORDER BY ach_id");
+            SQLize refreshAch = new SQLize("SELECT * FROM (SELECT * FROM Achievements ORDER BY ach_id DESC LIMIT 17) ORDER BY ach_id");
 
             // Call Read_Ach to read the data.
             refreshAch.Read_Ach();
@@ -255,7 +265,7 @@ namespace Guard
             achTextBox.Text = refreshAch.Get_Out();
 
             // Issue a new SELECT query for the Dates table.
-            SQLize refreshDates = new SQLize("SELECT datetime FROM (SELECT * FROM Dates ORDER BY date_id DESC LIMIT 14) ORDER BY date_id");
+            SQLize refreshDates = new SQLize("SELECT datetime FROM (SELECT * FROM Dates ORDER BY date_id DESC LIMIT 17) ORDER BY date_id");
 
             // Call Read_Dates to read the data.
             refreshDates.Read_Dates();
@@ -379,6 +389,7 @@ namespace Guard
         {
             // Do Nothing
         }
+
     }
 }
 

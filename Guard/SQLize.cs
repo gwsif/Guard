@@ -207,6 +207,35 @@ namespace Guard
             return aReturnInt;
         }
 
+        // COUNT_QUERY
+        //
+        // Used for running count queries or queries in which a SINGLE number will be returned.
+        public String Count_Query()
+        {
+            // Create a connection to the DB
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=GuardDB.sqlite;Version=3;");
+            m_dbConnection.Open();
+
+            // Create our command
+            SQLiteCommand command = new SQLiteCommand(commandString, m_dbConnection);
+
+            // Start the reader
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            // Shove the results into the return string
+            while (reader.Read())
+            {
+                aReturn = reader.GetInt64(0).ToString();
+            } 
+
+            // Close the connection to the DB
+            m_dbConnection.Close();
+
+            // Return the value;
+            return aReturn;
+        }
+
 
     }
 }
