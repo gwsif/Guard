@@ -192,8 +192,8 @@
             this.textBox8.ReadOnly = true;
             this.textBox8.Size = new System.Drawing.Size(534, 38);
             this.textBox8.TabIndex = 2;
-            this.textBox8.Text = "Adds a flat interval based on the time specified below onto the last occurrance d" +
-    "ate.";
+            this.textBox8.Text = "Adds the length of time of the last achievement interval plus thirty-six hours on" +
+    "to the last occurrance date.";
             // 
             // panel7
             // 

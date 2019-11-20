@@ -112,6 +112,7 @@
             this.allDatesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.allDatesTextBox.Size = new System.Drawing.Size(265, 398);
             this.allDatesTextBox.TabIndex = 14;
+            this.allDatesTextBox.TabStop = false;
             this.allDatesTextBox.Text = "ThisIsATest";
             this.allDatesTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
