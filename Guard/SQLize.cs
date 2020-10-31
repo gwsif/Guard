@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace Guard
             this.commandString = commandString;
         }
 
+
+
         // METHODS
         
         // GET_OUT()
@@ -35,6 +38,7 @@ namespace Guard
         {
             return aReturnInt;
         }
+
 
         // RUN_COMMAND()
         // This method establishes a connection to the Guard Database and executes
@@ -55,6 +59,7 @@ namespace Guard
             // Close the connection to the DB
             m_dbConnection.Close();
         }
+
 
         // READ_DATES()
         // This method reads dates from the dates table into the 'aReturn' string and
@@ -95,6 +100,69 @@ namespace Guard
 
             // Close the connection to the DB
             m_dbConnection.Close();
+
+        }
+
+        // PopulateTimeStamps
+        //
+        // This reads dates from the dates table into the 'aList' List. Effectively copies the Dates Table!
+        public void PopulateTimestamps()
+        {   
+            // Create a counter variable
+            int i = 1;
+
+            // Start GuardTime
+            GuardTime guard = new GuardTime();
+
+            // Create a connection to the DB.
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=GuardDB.sqlite;Version=3;");
+            m_dbConnection.Open();
+
+            // Create our command
+            SQLiteCommand command = new SQLiteCommand(commandString, m_dbConnection);
+
+            // Start the reader
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            // While the reader has data to read, add the value to the list.
+            while (reader.Read())
+            {
+                // Make some holder values;
+                string month;
+                string day;
+                string day_of_week;
+                string year;
+                string time;
+
+                // Test value for reader.read
+                Int64 test = reader.GetInt64(0);
+
+                // Initialize a DTO
+                DateTimeOffset dto = new DateTimeOffset();
+
+                // Get Guard to give us the DTO of the current line
+                dto = guard.EpochToDTO(reader.GetInt64(0));
+
+                // Pull the information
+                // month = guard.MonthToString(dto.Month);
+                month = dto.ToString("MMMM");
+                day = dto.Day.ToString();
+                day_of_week = dto.DayOfWeek.ToString();
+                year = dto.Year.ToString();
+                time = dto.TimeOfDay.ToString();              
+
+                // Create a SQLite Command to insert stuff
+                SQLiteCommand populate = new SQLiteCommand("INSERT OR IGNORE INTO Gregorian (greg_id, month, day, day_of_week, year, timestamp)" +
+                                                           "VALUES (" + i + "," + "'" + month + "'" + "," + "'" + day + "'" + "," + "'" + day_of_week + "'" + "," + "'" + year +
+                                                                    "'" + "," + "'" + time + "'" + ")", m_dbConnection);
+
+                // Run that command!
+                populate.ExecuteNonQuery();
+
+                // Increment the counter
+                i++;
+            }
 
         }
 

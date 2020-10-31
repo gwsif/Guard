@@ -117,10 +117,13 @@ namespace Guard
             // We use the SQLize class and create some objects first.
             SQLize datesTable = new SQLize("CREATE TABLE IF NOT EXISTS Dates (date_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, datetime INTEGER NOT NULL)");
             SQLize achTable = new SQLize("CREATE TABLE IF NOT EXISTS Achievements (ach_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, best_time INTEGER NOT NULL)");
+            SQLize gregTable = new SQLize("CREATE TABLE IF NOT EXISTS Gregorian (greg_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, month STRING NOT NULL," +
+                                          " day STRING NOT NULL, day_of_week STRING NOT NULL, year STRING NOT NULL, timestamp STRING NOT NULL)");
 
             // Next we use the Run_Command for the SQLize class to run the commands.
             datesTable.Run_Command();
             achTable.Run_Command();
+            gregTable.Run_Command();
 
             // Call RefreshData function to refresh the data
             RefreshData();

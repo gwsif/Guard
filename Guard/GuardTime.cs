@@ -343,6 +343,20 @@ namespace Guard
             return returnString;
         }
 
+        //EPOCHTODTO
+        //
+        // This method takes an epoch time and converts it to a DTO and then returns the DTO. Handy for
+        //    on the fly conversion of days, weeks, months, etc.
+        public DateTimeOffset EpochToDTO(Int64 unixTime)
+        {
+            // Declare our DateTimeOffset (DTO) and run the conversion.
+            DateTimeOffset dto = DateTimeOffset.FromUnixTimeSeconds(unixTime).ToLocalTime();
+
+            // Return the DTO
+            return dto;
+
+        }
+
         // DATETOEPOCH
         //
         // This method takes a DateTime object that is fed to it and converts it to an 64-bit Integer that is equivalent

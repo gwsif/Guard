@@ -109,6 +109,7 @@
             this.datesTextBox.Multiline = true;
             this.datesTextBox.Name = "datesTextBox";
             this.datesTextBox.ReadOnly = true;
+            this.datesTextBox.ShortcutsEnabled = false;
             this.datesTextBox.Size = new System.Drawing.Size(161, 226);
             this.datesTextBox.TabIndex = 4;
             this.datesTextBox.TabStop = false;

@@ -8,11 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace Guard
 {
     public partial class SeeAll : Form
     {
+        // Create our dataset object
+        DataSet ds = new DataSet();
+
+        int test = 0;
+
         // Making the top panel Draggable in order to create a nicer UI.
         bool drag = false;
         Point start_point = new Point(0, 0);
@@ -53,31 +59,18 @@ namespace Guard
         {
             InitializeComponent();
 
-            // Call clear on TextBox (to get rid of any placeholder text)
-            allDatesTextBox.Clear();
+            // Call refresh stats to update things like record counts etc...
+            RefreshStats();
 
-            // Call refresh data to issue the select statement and fill the
-            //    textboxes with the proper data.
-            RefreshData();
+            // Call refresh table to update our DataGridView
+            RefreshTable();
         }
 
 
         
-        // Same function as in MainWindow.cs, but with no limit on the select statement.
-        private void RefreshData()
+        // Refreshes Some Stats
+        private void RefreshStats()
         {
-            // Initialize GuardTime
-            GuardTime guard = new GuardTime();
-
-            // Issue a new SELECT query for the Dates table.
-            SQLize selectDates = new SQLize("SELECT datetime FROM (SELECT * FROM Dates ORDER BY date_id DESC) ORDER BY date_id");
-
-            // Call selectDates to read the data
-            selectDates.Read_Dates();
-
-            // Set the output of SQLize's Get_Out method to the all dates textbox.text
-            allDatesTextBox.Text = selectDates.Get_Out();
-
             // Issue a COUNT query for the Dates table.
             SQLize countDates = new SQLize("SELECT COUNT(date_id) FROM Dates");
 
@@ -88,7 +81,41 @@ namespace Guard
             numEntriesLabel.Text = countDates.Get_Out(); 
         }
 
-        // This button exports the database contents as it is shown in Guard (AKA non-epoch time)
+        // Refresh the table by updating the gregorian table in sqlite and then reading it into the table.
+        private void RefreshTable()
+        {
+            // Initialize Guardtime
+            GuardTime guard = new GuardTime();
+
+            // Populate the Gregorian Table
+            SQLize GenerateTimes = new SQLize("SELECT datetime FROM (SELECT * FROM Dates ORDER BY date_id DESC) ORDER BY date_id");
+
+            // Call PopulateTimestamps to update the Gregorian table
+            GenerateTimes.PopulateTimestamps();
+
+            
+            // Create a connection to the DB.
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=GuardDB.sqlite;Version=3;");
+            m_dbConnection.Open();
+        
+            // Create our adapter
+            var adapter = new SQLiteDataAdapter("SELECT day_of_week, month, day, year, timestamp FROM Gregorian", m_dbConnection);
+
+            // Fill the dataset object
+            adapter.Fill(ds);
+
+            // Close the connection to the DB
+            m_dbConnection.Close();
+
+
+            // Show this in the Data Grid View
+            guardDatesDGV.DataSource = ds.Tables[0].DefaultView;
+
+            
+        }
+
+        //This button exports the database contents as it is shown in Guard (AKA non-epoch time)
         private void exportFriendlyButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -99,14 +126,65 @@ namespace Guard
             saveFileDialog1.RestoreDirectory = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                // Create a stream writer object
                 StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
-                sw.WriteLine(allDatesTextBox.Text);
+
+                // Create a string builder object
+                StringBuilder str = new StringBuilder();
+
+                // Hardcoded Column headers for now (Needs a fixin'!)
+                str.Append("Day Of Week" + ",");
+                str.Append("Month" + ",");
+                str.Append("Day" + ",");
+                str.Append("Year" + ",");
+                str.Append("Time" + ",");
+                str.Append(System.Environment.NewLine);
+
+                // Start looping through the dataset we imported!
+
+                
+                foreach (DataTable table in ds.Tables) // for every table in the dataset
+                {
+                    foreach (DataRow row in table.Rows) // for every row in each table
+                    {
+                        foreach (DataColumn column in table.Columns) // for every column in that table
+                        {
+                            object item = row[column]; // an object called item is the combination of the row and the column
+
+                            str.Append(item.ToString() + ","); // append it!
+                            
+                        }
+
+                        str.Replace(",", System.Environment.NewLine, str.Length - 1, 1); // after every row, insert a new line character instead!
+
+                    }
+                }
+
+
+                // Dump the contents of str into the CSV file.
+                sw.Write(str);
+                
+                // Close the StreamWriter object!
                 sw.Close();
 
+                // Let the User know stuff happened!
                 MessageBox.Show("Saved Successfully!");
+
             }
 
 
+        }
+
+        private void guardDatesDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        // User clicks on Report Button
+        private void reportButton_Click(object sender, EventArgs e)
+        {
+            Report r2 = new Report();
+            r2.ShowDialog();
         }
     }
 }

@@ -28,17 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.seeAllTopPanel = new System.Windows.Forms.Panel();
             this.closeButton = new System.Windows.Forms.Button();
             this.rightBorder = new System.Windows.Forms.Panel();
             this.bottomBorder = new System.Windows.Forms.Panel();
             this.leftBorder = new System.Windows.Forms.Panel();
-            this.allDatesTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.numEntriesLabel = new System.Windows.Forms.Label();
             this.exportRAWButton = new System.Windows.Forms.Button();
             this.exportFriendlyButton = new System.Windows.Forms.Button();
+            this.guardDatesDGV = new System.Windows.Forms.DataGridView();
+            this.DayOfWeek = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MonthName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reportButton = new System.Windows.Forms.Button();
             this.seeAllTopPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guardDatesDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // seeAllTopPanel
@@ -47,7 +59,7 @@
             this.seeAllTopPanel.Controls.Add(this.closeButton);
             this.seeAllTopPanel.Location = new System.Drawing.Point(1, 1);
             this.seeAllTopPanel.Name = "seeAllTopPanel";
-            this.seeAllTopPanel.Size = new System.Drawing.Size(577, 33);
+            this.seeAllTopPanel.Size = new System.Drawing.Size(836, 33);
             this.seeAllTopPanel.TabIndex = 0;
             this.seeAllTopPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.seeAllTopPanel_MouseDown);
             this.seeAllTopPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.seeAllTopPanel_MouseMove);
@@ -62,7 +74,7 @@
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.closeButton.ForeColor = System.Drawing.Color.White;
-            this.closeButton.Location = new System.Drawing.Point(539, 0);
+            this.closeButton.Location = new System.Drawing.Point(799, 0);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(38, 33);
             this.closeButton.TabIndex = 4;
@@ -75,7 +87,7 @@
             // 
             this.rightBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.rightBorder.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rightBorder.Location = new System.Drawing.Point(578, 0);
+            this.rightBorder.Location = new System.Drawing.Point(837, 0);
             this.rightBorder.Name = "rightBorder";
             this.rightBorder.Size = new System.Drawing.Size(1, 450);
             this.rightBorder.TabIndex = 1;
@@ -86,7 +98,7 @@
             this.bottomBorder.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomBorder.Location = new System.Drawing.Point(0, 449);
             this.bottomBorder.Name = "bottomBorder";
-            this.bottomBorder.Size = new System.Drawing.Size(578, 1);
+            this.bottomBorder.Size = new System.Drawing.Size(837, 1);
             this.bottomBorder.TabIndex = 2;
             // 
             // leftBorder
@@ -97,24 +109,6 @@
             this.leftBorder.Name = "leftBorder";
             this.leftBorder.Size = new System.Drawing.Size(1, 449);
             this.leftBorder.TabIndex = 3;
-            // 
-            // allDatesTextBox
-            // 
-            this.allDatesTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.allDatesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.allDatesTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allDatesTextBox.ForeColor = System.Drawing.SystemColors.Menu;
-            this.allDatesTextBox.Location = new System.Drawing.Point(302, 40);
-            this.allDatesTextBox.Multiline = true;
-            this.allDatesTextBox.Name = "allDatesTextBox";
-            this.allDatesTextBox.ReadOnly = true;
-            this.allDatesTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.allDatesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.allDatesTextBox.Size = new System.Drawing.Size(265, 398);
-            this.allDatesTextBox.TabIndex = 14;
-            this.allDatesTextBox.TabStop = false;
-            this.allDatesTextBox.Text = "ThisIsATest";
-            this.allDatesTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
@@ -171,18 +165,130 @@
             this.exportFriendlyButton.UseVisualStyleBackColor = false;
             this.exportFriendlyButton.Click += new System.EventHandler(this.exportFriendlyButton_Click);
             // 
+            // guardDatesDGV
+            // 
+            this.guardDatesDGV.AllowUserToAddRows = false;
+            this.guardDatesDGV.AllowUserToDeleteRows = false;
+            this.guardDatesDGV.AllowUserToResizeColumns = false;
+            this.guardDatesDGV.AllowUserToResizeRows = false;
+            this.guardDatesDGV.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.guardDatesDGV.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.MediumSlateBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.guardDatesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.guardDatesDGV.ColumnHeadersHeight = 25;
+            this.guardDatesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.guardDatesDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DayOfWeek,
+            this.MonthName,
+            this.Day,
+            this.Year,
+            this.Time});
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.MediumSlateBlue;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.guardDatesDGV.DefaultCellStyle = dataGridViewCellStyle9;
+            this.guardDatesDGV.EnableHeadersVisualStyles = false;
+            this.guardDatesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.guardDatesDGV.Location = new System.Drawing.Point(298, 40);
+            this.guardDatesDGV.Name = "guardDatesDGV";
+            this.guardDatesDGV.ReadOnly = true;
+            this.guardDatesDGV.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.guardDatesDGV.RowHeadersVisible = false;
+            this.guardDatesDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.guardDatesDGV.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.guardDatesDGV.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.guardDatesDGV.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.guardDatesDGV.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guardDatesDGV.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.guardDatesDGV.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.MediumSlateBlue;
+            this.guardDatesDGV.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.guardDatesDGV.Size = new System.Drawing.Size(528, 398);
+            this.guardDatesDGV.TabIndex = 19;
+            this.guardDatesDGV.TabStop = false;
+            this.guardDatesDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.guardDatesDGV_CellContentClick);
+            // 
+            // DayOfWeek
+            // 
+            this.DayOfWeek.DataPropertyName = "day_of_week";
+            this.DayOfWeek.HeaderText = "Day Of Week";
+            this.DayOfWeek.Name = "DayOfWeek";
+            this.DayOfWeek.ReadOnly = true;
+            // 
+            // MonthName
+            // 
+            this.MonthName.DataPropertyName = "month";
+            this.MonthName.HeaderText = "Month";
+            this.MonthName.Name = "MonthName";
+            this.MonthName.ReadOnly = true;
+            // 
+            // Day
+            // 
+            this.Day.DataPropertyName = "day";
+            this.Day.HeaderText = "Day";
+            this.Day.Name = "Day";
+            this.Day.ReadOnly = true;
+            // 
+            // Year
+            // 
+            this.Year.DataPropertyName = "year";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.Year.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Year.HeaderText = "Year";
+            this.Year.Name = "Year";
+            this.Year.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "timestamp";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Time.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // reportButton
+            // 
+            this.reportButton.BackColor = System.Drawing.Color.Green;
+            this.reportButton.FlatAppearance.BorderSize = 0;
+            this.reportButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateBlue;
+            this.reportButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SlateBlue;
+            this.reportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reportButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportButton.ForeColor = System.Drawing.Color.White;
+            this.reportButton.Location = new System.Drawing.Point(92, 288);
+            this.reportButton.Name = "reportButton";
+            this.reportButton.Size = new System.Drawing.Size(113, 31);
+            this.reportButton.TabIndex = 20;
+            this.reportButton.Text = "Report Card";
+            this.reportButton.UseVisualStyleBackColor = false;
+            this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
+            // 
             // SeeAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
-            this.ClientSize = new System.Drawing.Size(579, 450);
+            this.ClientSize = new System.Drawing.Size(838, 450);
+            this.Controls.Add(this.reportButton);
+            this.Controls.Add(this.guardDatesDGV);
             this.Controls.Add(this.seeAllTopPanel);
             this.Controls.Add(this.exportFriendlyButton);
             this.Controls.Add(this.exportRAWButton);
             this.Controls.Add(this.numEntriesLabel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.allDatesTextBox);
             this.Controls.Add(this.leftBorder);
             this.Controls.Add(this.bottomBorder);
             this.Controls.Add(this.rightBorder);
@@ -190,8 +296,8 @@
             this.Name = "SeeAll";
             this.Text = "Form2";
             this.seeAllTopPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.guardDatesDGV)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -202,10 +308,16 @@
         private System.Windows.Forms.Panel bottomBorder;
         private System.Windows.Forms.Panel leftBorder;
         private System.Windows.Forms.Button closeButton;
-        private System.Windows.Forms.TextBox allDatesTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label numEntriesLabel;
         private System.Windows.Forms.Button exportRAWButton;
         private System.Windows.Forms.Button exportFriendlyButton;
+        private System.Windows.Forms.DataGridView guardDatesDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DayOfWeek;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MonthName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Day;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Year;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.Button reportButton;
     }
 }
