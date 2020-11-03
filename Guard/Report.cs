@@ -24,7 +24,41 @@ namespace Guard
         // A DataTable object
         DataTable dt = new DataTable();
 
-        
+        // Making the top panel Draggable in order to create a nicer UI.
+        bool drag = false;
+
+        Point start_point = new Point(0, 0);
+
+        // This allows the top panel to function as an actual windows header bar
+        private void seeAllTopPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+            start_point = new Point(e.X, e.Y);
+        }
+
+        // Now we allow the top panel to drag the windows around on the users screen.
+        private void seeAllTopPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (drag)
+            {
+                Point p = PointToScreen(e.Location);
+                this.Location = new Point(p.X - start_point.X, p.Y - start_point.Y);
+                this.Update();
+            }
+        }
+
+        // When the user lets go of the mouse, set drag back to false
+        private void seeAllTopPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+
+        // CLOSE BUTTON
+        private void closeButton_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
 
         public Report()
         {
@@ -475,7 +509,10 @@ namespace Guard
             // Get Current Year
             string currYear = DateTime.Today.ToString("yyyy", CultureInfo.InvariantCulture);
 
+            // Set Monthly Total
             Int64 monthlyTotal = 0;
+
+            // Set Previous Monthly Total
             Int64 prevTotal = 0;
 
             SQLiteConnection m_dbConnection;
@@ -523,50 +560,36 @@ namespace Guard
                 monthlyTotal = getMonthlyTotal.GetInt64(1);
             }
 
-            // Check if current total is approaching past 3 month average
-            double warningThresh = threeMonthAVG - 5;
-            double criticalThresh = threeMonthAVG - 2;
-            double thresh = threeMonthAVG - 1;
+            // Check if current total is approaching previous month
+            double warningThresh = prevTotal - 5; // five times below the previous months total
+            double criticalThresh = prevTotal - 2; // two times below the previous months total
+            double thresh = threeMonthAVG - 1; // genuinely useless
             double currWeekAvg = (monthlyTotal / 5);
             //double weeklySuggestion = Math.Round(currWeekAvg - fiveWeekAVG, 0);
 
+            // If current monthly total is less than the previous monthly total
             if (monthlyTotal < warningThresh)
             {
-                trendOutLabel.Text = "Trending Down by " + (thresh - monthlyTotal);
-                adviceTextBox.Text = "You are on track to continue trending downwards. You have " + (warningThresh - monthlyTotal) + " times left before you exceed your 3 month average and " + (prevTotal - monthlyTotal) + " times left this month before you endanger your trend.";
+                trendOutLabel.Text = "Trending Down by " + (prevTotal - monthlyTotal);
+                adviceTextBox.Text = "You are on track to continue trending downwards. You have " + (threeMonthAVG - monthlyTotal) + " times left before you exceed your 3 month average and " + (prevTotal - monthlyTotal) + " times left this month before you endanger your trend.";
             }
 
             else if ((monthlyTotal >= warningThresh) & (monthlyTotal < criticalThresh))
             {
-                trendOutLabel.Text = "Trending Slightly Down by " + (thresh - monthlyTotal);
-                adviceTextBox.Text = "You are approaching your three month average. You have " + (thresh - monthlyTotal) + " times left before you exceed your 3 month average and " + (prevTotal - monthlyTotal) + " times left this month before you endanger your trend.";
+                trendOutLabel.Text = "Trending Slightly Down by " + (prevTotal - monthlyTotal);
+                adviceTextBox.Text = "You are approaching your three month average. You have " + (threeMonthAVG - monthlyTotal) + " times left before you exceed your 3 month average and " + (prevTotal - monthlyTotal) + " times left this month before you endanger your trend.";
             }
 
-           else if ((monthlyTotal >= criticalThresh) & (monthlyTotal < thresh))
+           else if ((monthlyTotal >= criticalThresh) & (monthlyTotal < prevTotal))
             {
-                trendOutLabel.Text = "Trending Steady";
-                adviceTextBox.Text = "You have hit your three month average. You have " + (prevTotal - monthlyTotal) + "times left before you trend upwards.";
+                trendOutLabel.Text = "Trend Warning";
+                adviceTextBox.Text = "You are close to breaking your trend. You have " + (threeMonthAVG - monthlyTotal) + " times left before you exceed your 3 month average and " + (prevTotal - monthlyTotal) + " times left this month before you trend upwards.";
             }
 
-            else if (monthlyTotal == threeMonthAVG)
+            else if (monthlyTotal == prevTotal)
             {
                 trendOutLabel.Text = "Trending Steady";
-                adviceTextBox.Text = "You have hit your three month average.";
-
-                if (monthlyTotal > prevTotal)
-                {
-                    adviceTextBox.Text += " You trending upwards at a rate of + " + (monthlyTotal - prevTotal) + " times this month";
-                }
-
-                else if (monthlyTotal == prevTotal)
-                {
-                    adviceTextBox.Text += " You are trending steady. Instances are equal with last months.";
-                }
-
-                else
-                {
-                    adviceTextBox.Text += " You are still trending downwards from last month at a rate of -" + (prevTotal - monthlyTotal) + " times this month";
-                }
+                adviceTextBox.Text = "Your current 3 month average is " + threeMonthAVG + " and your current monthly total is " + monthlyTotal + ". You have hit last months total and will trend upwards on next occurrence.";
 
             }
 
@@ -576,16 +599,16 @@ namespace Guard
                 
                 if (monthlyTotal >= prevTotal)
                 {
-                    adviceTextBox.Text = "You have exceeded your three month average and are trending upwards at a rate of +" + (monthlyTotal - prevTotal) + " times this month";
+                    adviceTextBox.Text = "Your current 3 month average is " + threeMonthAVG + " and your current monthly total is " + monthlyTotal + ". You have exceeded last months total and are trending upwards at a rate of +" + (monthlyTotal - prevTotal) + " times this month";
                 }
 
                 else
                 {
-                    adviceTextBox.Text = "You have exceeded your three month average. You have " + (prevTotal - monthlyTotal) + " times left before you trend upwards.";
+                    adviceTextBox.Text = "money machine broke - contact developer if you see this message";
                 }
             }
 
-            bool test1 = (monthlyTotal > warningThresh);
+            //bool test1 = (monthlyTotal > warningThresh);
 
         }
 
@@ -593,7 +616,13 @@ namespace Guard
 
         private void label1_Click(object sender, EventArgs e)
         {
-            //Do nothing
+            // Do Nothing
         }
+
+        private void seeAllTopPanel_Paint(object sender, PaintEventArgs e)
+        {
+            // Do Nothing
+        }
+
     }
 }

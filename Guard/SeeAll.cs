@@ -41,7 +41,7 @@ namespace Guard
             }
         }
 
-        // When the user lets go odf the mouse, set drag back to false
+        // When the user lets go of the mouse, set drag back to false
         private void seeAllTopPanel_MouseUp(object sender, MouseEventArgs e)
         {
             drag = false;

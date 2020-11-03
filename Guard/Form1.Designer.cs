@@ -142,6 +142,7 @@
             this.textBox1.Size = new System.Drawing.Size(222, 210);
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -149,9 +150,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(508, 119);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Version 0.9.5.2";
+            this.label1.Text = "Version 0.9.5.13";
             // 
             // Form1
             // 
